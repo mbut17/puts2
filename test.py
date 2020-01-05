@@ -8,6 +8,7 @@ class MyTestCase(unittest.TestCase):
             self.app = main.app.test_client()
 
         def testint(self):
+<<<<<<< HEAD
             fed =  self.app.get('/add?A=6&B=12')
             self.assertEqual(b'18.0', fed.data)
             self.assertNotEqual(b'24.000',fed.data)
@@ -53,6 +54,23 @@ class MyTestCase(unittest.TestCase):
             fed =  self.app.get('/mul?A=8.2&B=-4.3')
             self.assertEqual(b'-35.26', fed.data)
 
+=======
+            fed =  self.app.get('/div?A=7&B=5')
+            self.assertEqual(b'1.4', fed.data)
+            self.assertNotEqual(b'0.0256',fed.data)
+        def testfloat(self):
+            fed =  self.app.get('/div?A=3.5&B=8.4')
+            self.assertEqual(b'0.417', fed.data)
+        def testfrac(self):
+            fed =  self.app.get('/div?A=2/3&B=3/3')
+            self.assertEqual(b'0.667', fed.data)
+        def testneg(self):
+            fed =  self.app.get('/div?A=5.4&B=-3.3')
+            self.assertEqual(b'-1.636', fed.data)
+        def testzerodiv(self):
+            fed = self.app.get('/div?A=3/0&B=9')
+            self.assertEqual(b'None',fed.data)
+>>>>>>> division
 
 if __name__ == '__main__':
     unittest.main()
