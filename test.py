@@ -6,7 +6,6 @@ class MyTestCase(unittest.TestCase):
         def setUp(self):
             main.app.testing = True
             self.app = main.app.test_client()
-<<<<<<< HEAD
 
         def testint(self):
             fed =  self.app.get('/add?A=6&B=12')
@@ -40,9 +39,6 @@ class MyTestCase(unittest.TestCase):
             fed =  self.app.get('/sub?A=2.3&B=-3.3')
             self.assertEqual(b'5.6', fed.data)
         
-=======
-	
-	
 	def testint(self):
             fed =  self.app.get('/mul?A=3&B=2')
             self.assertEqual(b'6.0', fed.data)
@@ -57,7 +53,6 @@ class MyTestCase(unittest.TestCase):
             fed =  self.app.get('/mul?A=8.2&B=-4.3')
             self.assertEqual(b'-35.26', fed.data)
 
->>>>>>> multiplication
 
 if __name__ == '__main__':
     unittest.main()
