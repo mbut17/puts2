@@ -11,21 +11,21 @@ def index():
 @app.route('/div')
 def division():
     try:
-        r1=request.args.get('A',default = 0, type = Fraction)
+        value1=request.args.get('A',default = 0, type = Fraction)
     except ZeroDivisionError as error:
-        r1='None'
+        value1='None'
     try:
-        r2=request.args.get('B',default = 0, type = Fraction)
+        value2=request.args.get('B',default = 0, type = Fraction)
     except ZeroDivisionError as error:
-        r2='None'
-    if r1 == 'None' or r2 == 'None' :
+        value2='None'
+    if value1 == 'None' or value2 == 'None' :
         return 'None'
     else:
-        a = Fraction(r1)
-        b= Fraction(r2)
+        C = Fraction(value1)
+        D = Fraction(value2)
         try:
-            res= a/b
-            return(str(round(float(res),3)))
+            result = C/D
+            return str(float(result))
         except ZeroDivisionError as error:
             return 'None'
 
