@@ -1,90 +1,86 @@
 from flask import Flask, request
 from fractions import Fraction
 from decimal import Decimal
-
 app = Flask(__name__)
-
 @app.route('/')
 def index():
-    return 'Usage;\n<Operation>?A=<Value1>&B=<Value2>\n'
-
+    return 'Usage;\nOperation?A=<Value1>&B=<Value2>\n'
 
 @app.route('/add')
 def addition():
-     try:
-        r1=request.args.get('A',default = 0, type = Fraction)
-    except ZeroDivisionError as error:
-        r1='None'
     try:
-        r2=request.args.get('B',default = 0, type = Fraction)
+        value1=request.args.get('A',default = 0, type = Fraction)
     except ZeroDivisionError as error:
-        r2='None'
-    if r1 == 'None' or r2 == 'None' :
+        value1='None'
+    try:
+        value2=request.args.get('B',default = 0, type = Fraction)
+    except ZeroDivisionError as error:
+        value2='None'
+    if value1 == 'None' or value2 == 'None' :
         return 'None'
     else:
-        a = Fraction(r1)
-        b= Fraction(r2)
-        res= a+b
-        return str(round(float(res),3))
+        C = Fraction(value1)
+        D = Fraction(value2)
+        result = C+D
+        return str(float(result))#removed round function and results in float
 
-@app.route('/div')
-def division():
+@app.route('/sub')
+def subtraction():
     try:
-        r1=request.args.get('A',default = 0, type = Fraction)
+        value1=request.args.get('A',default = 0, type = Fraction)
     except ZeroDivisionError as error:
-        r1='None'
+        value1='None'
     try:
-        r2=request.args.get('B',default = 0, type = Fraction)
+        value2=request.args.get('B',default = 0, type = Fraction)
     except ZeroDivisionError as error:
-        r2='None'
-    if r1 == 'None' or r2 == 'None' :
+        value2='None'
+    if value1 == 'None' or value2 == 'None' :
         return 'None'
     else:
-        a = Fraction(r1)
-        b= Fraction(r2)
-        try:
-            res= a/b
-            return(str(round(float(res),3)))
-        except ZeroDivisionError as error:
-            return 'None'
+        C = Fraction(value1)
+        D = Fraction(value2)
+        result = C-D
+        return str(float(result))
 
 
 @app.route('/mul')
 def multiplication():
     try:
-        r1=request.args.get('A',default = 0, type = Fraction)
+        value1=request.args.get('A',default = 0, type = Fraction)
     except ZeroDivisionError as error:
-        r1='None'
+        value1='None'
     try:
-        r2=request.args.get('B',default = 0, type = Fraction)
+        value2=request.args.get('B',default = 0, type = Fraction)
     except ZeroDivisionError as error:
-        r2='None'
-    if r1 == 'None' or r2 == 'None' :
+        value2='None'
+    if value1 == 'None' or value2 == 'None' :
         return 'None'
     else:
-        a = Fraction(r1)
-        b= Fraction(r2)
-        res= a*b
-        return(str(round(float(res),3)))
+        C = Fraction(value1)
+        D = Fraction(value2)
+        result = C*D
+        return str(float(result))
 
-@app.route('/sub')
-def subtraction():
+@app.route('/div')
+def division():
     try:
-        r1=request.args.get('A',default = 0, type = Fraction)
+        value1=request.args.get('A',default = 0, type = Fraction)
     except ZeroDivisionError as error:
-        r1='None'
+        value1='None'
     try:
-        r2=request.args.get('B',default = 0, type = Fraction)
+        value2=request.args.get('B',default = 0, type = Fraction)
     except ZeroDivisionError as error:
-        r2='None'
-    if r1 == 'None' or r2 == 'None' :
+        value2='None'
+    if value1 == 'None' or value2 == 'None' :
         return 'None'
     else:
-        a = Fraction(r1)
-        b= Fraction(r2)
-        res= a-b
-        return(str(round(float(res),3)))
-
+        C = Fraction(value1)
+        D = Fraction(value2)
+        try:
+            result = C/D
+            return str(float(result))
+        except ZeroDivisionError as error:
+            return 'None'
 
 if __name__ == "__main__":
     app.run()
